@@ -1,6 +1,6 @@
 package com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl;
 
-import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.ArtifactNotFoundException;
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ArtifactNotFoundException;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Artifact;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Wizard;
 import com.omneya.hogwarts.hogwartsartifactsonline.repositories.ArtifactRepository;

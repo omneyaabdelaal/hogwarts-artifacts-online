@@ -1,4 +1,4 @@
-package com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions;
+package com.omneya.hogwarts.hogwartsartifactsonline.exceptions;
 
 public class ArtifactNotFoundException extends RuntimeException {
 

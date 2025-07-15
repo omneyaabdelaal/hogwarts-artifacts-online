@@ -2,7 +2,7 @@ package com.omneya.hogwarts.hogwartsartifactsonline.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.omneya.hogwarts.hogwartsartifactsonline.dto.ArtifactDto;
-import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.ArtifactNotFoundException;
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ArtifactNotFoundException;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Artifact;
 import com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl.ArtifactServiceImpl;
 import com.omneya.hogwarts.hogwartsartifactsonline.system.StatusCode;

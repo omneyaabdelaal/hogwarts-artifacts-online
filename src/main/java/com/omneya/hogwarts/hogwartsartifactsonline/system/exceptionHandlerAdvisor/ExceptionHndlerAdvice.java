@@ -1,9 +1,9 @@
-package com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.exceptionHandlerAdvisor;
+package com.omneya.hogwarts.hogwartsartifactsonline.system.exceptionHandlerAdvisor;
 
 import com.omneya.hogwarts.hogwartsartifactsonline.system.Result;
 import com.omneya.hogwarts.hogwartsartifactsonline.system.StatusCode;
-import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.ArtifactNotFoundException;
-import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.WizardNotFoundException;
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ArtifactNotFoundException;
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.WizardNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

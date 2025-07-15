@@ -6,7 +6,7 @@ import com.omneya.hogwarts.hogwartsartifactsonline.models.Artifact;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Wizard;
 import com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl.WizardServiceImpl;
 import com.omneya.hogwarts.hogwartsartifactsonline.system.StatusCode;
-import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.WizardNotFoundException;
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.WizardNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

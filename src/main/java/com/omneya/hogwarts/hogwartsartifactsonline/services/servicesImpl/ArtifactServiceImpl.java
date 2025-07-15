@@ -1,12 +1,11 @@
 package com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl;
 
-import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.ArtifactNotFoundException;
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ArtifactNotFoundException;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Artifact;
 import com.omneya.hogwarts.hogwartsartifactsonline.repositories.ArtifactRepository;
 import com.omneya.hogwarts.hogwartsartifactsonline.services.ArtifactService;
 import com.omneya.hogwarts.hogwartsartifactsonline.utils.IdWorker;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
 import org.springframework.stereotype.Service;

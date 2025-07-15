@@ -1,10 +1,9 @@
 package com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl;
 
-import com.omneya.hogwarts.hogwartsartifactsonline.dto.WizardDto;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Wizard;
 import com.omneya.hogwarts.hogwartsartifactsonline.repositories.WizardRepository;
 import com.omneya.hogwarts.hogwartsartifactsonline.services.WizardService;
-import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.WizardNotFoundException;
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.WizardNotFoundException;
 import com.omneya.hogwarts.hogwartsartifactsonline.utils.IdWorker;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
