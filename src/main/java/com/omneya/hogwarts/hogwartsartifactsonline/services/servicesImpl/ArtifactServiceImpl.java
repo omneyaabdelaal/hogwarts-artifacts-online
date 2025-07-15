@@ -1,12 +1,12 @@
 package com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl;
 
-import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.ArtifactNotFoundException;
+
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ObjectNotFoundException;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Artifact;
 import com.omneya.hogwarts.hogwartsartifactsonline.repositories.ArtifactRepository;
 import com.omneya.hogwarts.hogwartsartifactsonline.services.ArtifactService;
 import com.omneya.hogwarts.hogwartsartifactsonline.utils.IdWorker;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class ArtifactServiceImpl implements ArtifactService {
 
       return this.artifactRepository
                  .findById(id)
-                 .orElseThrow(()->new ArtifactNotFoundException(id));
+                 .orElseThrow(()->new ObjectNotFoundException(id));
     }
 
     @Override
@@ -51,13 +51,13 @@ public class ArtifactServiceImpl implements ArtifactService {
                     oldArtifact.setImageURL(update.getImageURL());
 
                     return this.artifactRepository.save(oldArtifact);
-                }).orElseThrow(()->new ArtifactNotFoundException(id));
+                }).orElseThrow(()->new ObjectNotFoundException(id));
 
     }
 
     @Override
     public void delete(String id) {
-       Artifact artifact=this.artifactRepository.findById(id).orElseThrow(()->new ArtifactNotFoundException(id));
+       Artifact artifact=this.artifactRepository.findById(id).orElseThrow(()->new ObjectNotFoundException(id));
         this.artifactRepository.deleteById(id);
     }
 

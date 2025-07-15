@@ -1,8 +1,8 @@
-package com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.exceptionHandlerAdvisor;
+package com.omneya.hogwarts.hogwartsartifactsonline.system.exceptionHandlerAdvisor;
 
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ObjectNotFoundException;
 import com.omneya.hogwarts.hogwartsartifactsonline.system.Result;
 import com.omneya.hogwarts.hogwartsartifactsonline.system.StatusCode;
-import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.ArtifactNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,10 +17,10 @@ import java.util.Map;
 @RestControllerAdvice
 public class ExceptionHndlerAdvice {
 
-    @ExceptionHandler(value = { ArtifactNotFoundException.class })
+    @ExceptionHandler(value = { ObjectNotFoundException.class })
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    Result handleArtifactNotFoundException(ArtifactNotFoundException e) {
-        return new Result(false, StatusCode.NOT_FOUND,"Could Not Find Artifact with Id 1250808601744904191 :(!");
+    Result handleObjectNotFoundException(ObjectNotFoundException e) {
+        return new Result(false, StatusCode.NOT_FOUND, e.getMessage());
     }
 
     @ExceptionHandler(value= MethodArgumentNotValidException.class)
@@ -34,4 +34,6 @@ public class ExceptionHndlerAdvice {
         });
         return new Result(false,StatusCode.INVALID_ARGUMENT,"Provided Argument Not Valid",errors);
     }
+
+
 }

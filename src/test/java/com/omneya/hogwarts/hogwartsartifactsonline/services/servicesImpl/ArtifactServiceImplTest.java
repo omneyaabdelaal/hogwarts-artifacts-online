@@ -1,6 +1,7 @@
 package com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl;
 
-import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.ArtifactNotFoundException;
+
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ObjectNotFoundException;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Artifact;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Wizard;
 import com.omneya.hogwarts.hogwartsartifactsonline.repositories.ArtifactRepository;
@@ -82,7 +83,7 @@ class ArtifactServiceImplTest {
         artifact.setImageURL("ImageUrl");
 
         Wizard wizard = new Wizard();
-        wizard.setId(2);
+        wizard.setId(2L);
         wizard.setName("Harry Potter");
 
         artifact.setOwner(wizard);
@@ -109,8 +110,8 @@ class ArtifactServiceImplTest {
         });
         //Then
         assertThat(throwable)
-                .isInstanceOf(ArtifactNotFoundException.class)
-                .hasMessage("Artifact with id 1250808601744904192 not found :(");
+                .isInstanceOf(ObjectNotFoundException.class)
+                .hasMessage("Could Not Find Artifact with Id 1250808601744904192 :(!");
         verify(artifactRepository, times(1)).findById("1250808601744904192");
 
 
@@ -132,7 +133,7 @@ class ArtifactServiceImplTest {
 
     @Test
     void testAddSuccess() {
-        //Givev
+        //Given
         Artifact newArtifact = new Artifact();
         newArtifact.setName("Artifact 3");
         newArtifact.setDescription("Artifact description 3");
@@ -195,11 +196,12 @@ class ArtifactServiceImplTest {
 
         given(artifactRepository.findById("1250808601744904192")).willReturn(Optional.empty());
 
-        //WHEN
+        //WHEN and then
 
-        assertThrows(ArtifactNotFoundException.class,()->{
+        assertThrows(ObjectNotFoundException.class,()->{
             artifactServiceImpl.update("1250808601744904192",newArtifact);
         });
+
         verify(artifactRepository,times(1)).findById("1250808601744904192");
     }
 
@@ -229,7 +231,7 @@ class ArtifactServiceImplTest {
         given(artifactRepository.findById("123")).willReturn(Optional.empty());
 
         //When
-        assertThrows(ArtifactNotFoundException.class,()->artifactServiceImpl.delete("123"));
+        assertThrows(ObjectNotFoundException.class,()->artifactServiceImpl.delete("123"));
 
         //then
         verify(artifactRepository,times(1)).findById("123");
