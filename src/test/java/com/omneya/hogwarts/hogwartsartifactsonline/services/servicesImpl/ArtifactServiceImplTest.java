@@ -82,7 +82,7 @@ class ArtifactServiceImplTest {
         artifact.setImageURL("ImageUrl");
 
         Wizard wizard = new Wizard();
-        wizard.setId(2);
+        wizard.setId(2L);
         wizard.setName("Harry Potter");
 
         artifact.setOwner(wizard);
@@ -132,7 +132,7 @@ class ArtifactServiceImplTest {
 
     @Test
     void testAddSuccess() {
-        //Givev
+        //Given
         Artifact newArtifact = new Artifact();
         newArtifact.setName("Artifact 3");
         newArtifact.setDescription("Artifact description 3");
@@ -195,11 +195,12 @@ class ArtifactServiceImplTest {
 
         given(artifactRepository.findById("1250808601744904192")).willReturn(Optional.empty());
 
-        //WHEN
+        //WHEN and then
 
         assertThrows(ArtifactNotFoundException.class,()->{
             artifactServiceImpl.update("1250808601744904192",newArtifact);
         });
+
         verify(artifactRepository,times(1)).findById("1250808601744904192");
     }
 

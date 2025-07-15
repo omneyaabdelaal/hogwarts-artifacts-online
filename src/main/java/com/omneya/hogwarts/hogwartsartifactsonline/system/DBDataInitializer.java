@@ -58,19 +58,19 @@ public class DBDataInitializer implements CommandLineRunner {
         a6.setImageURL("ImageUrl");
 
         Wizard w1 = new Wizard();
-        w1.setId(1);
+        w1.setId(1L);
         w1.setName("Albus Dumbledore");
         w1.addArtifact(a1);
         w1.addArtifact(a3);
 
         Wizard w2 = new Wizard();
-        w2.setId(2);
+        w2.setId(2L);
         w2.setName("Harry Potter");
         w2.addArtifact(a2);
         w2.addArtifact(a4);
 
         Wizard w3 = new Wizard();
-        w3.setId(3);
+        w3.setId(3L);
         w3.setName("Neville Longbottom");
         w3.addArtifact(a5);
 

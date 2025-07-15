@@ -1,4 +1,10 @@
 package com.omneya.hogwarts.hogwartsartifactsonline.dto;
 
-public record WizardDto(Integer id, String name,Integer numberOfArtifacts) {
+import jakarta.validation.constraints.NotEmpty;
+
+public record WizardDto(
+                        Long id,
+                        @NotEmpty(message = "Name Is Required")
+                        String name,
+                        Integer numberOfArtifacts) {
 }

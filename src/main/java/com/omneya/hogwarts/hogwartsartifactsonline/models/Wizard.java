@@ -20,7 +20,7 @@ public class Wizard implements Serializable {
 
 
     @Id
-    private int id;
+    private Long id;
     @Column(nullable = false)
     private String name;
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "owner")

@@ -3,6 +3,7 @@ package com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.exceptionH
 import com.omneya.hogwarts.hogwartsartifactsonline.system.Result;
 import com.omneya.hogwarts.hogwartsartifactsonline.system.StatusCode;
 import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.ArtifactNotFoundException;
+import com.omneya.hogwarts.hogwartsartifactsonline.system.exceptions.WizardNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -33,5 +34,11 @@ public class ExceptionHndlerAdvice {
             errors.put(error.getField(),error.getDefaultMessage());
         });
         return new Result(false,StatusCode.INVALID_ARGUMENT,"Provided Argument Not Valid",errors);
+    }
+
+    @ExceptionHandler(value = {WizardNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    Result handleWizardNotFoundException(WizardNotFoundException e) {
+        return new Result(false,StatusCode.NOT_FOUND, e.getMessage(),null);
     }
 }
