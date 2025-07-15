@@ -1,10 +1,9 @@
 package com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl;
 
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ObjectNotFoundException;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Artifact;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Wizard;
 import com.omneya.hogwarts.hogwartsartifactsonline.repositories.WizardRepository;
-import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.WizardNotFoundException;
-import com.omneya.hogwarts.hogwartsartifactsonline.utils.IdWorker;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,8 +31,6 @@ class WizardServiceImplTest {
     private WizardRepository wizardRepository;
     @InjectMocks
     private WizardServiceImpl wizardServiceImpl;
-    @Mock
-    private IdWorker idWorker;
 
     List<Wizard> wizards;
 
@@ -122,8 +119,8 @@ class WizardServiceImplTest {
 
         //then
         assertThat(throwable)
-                .isInstanceOf(WizardNotFoundException.class)
-                .hasMessage("Wizard with id 1 not found :(");
+                .isInstanceOf(ObjectNotFoundException.class)
+                .hasMessage("Could Not Find Wizard with Id 1 :(!");
 
         verify(wizardRepository,times(1)).findById(1L);
     }
@@ -146,15 +143,13 @@ class WizardServiceImplTest {
     void testAddSuccess() {
         //given
         Wizard wizard = new Wizard();
-        wizard.setId(123L);
         wizard.setName("Wizard 123");
 
-        given(idWorker.nextId()).willReturn(123L);
+
         given(wizardRepository.save(wizard)).willReturn(wizard);
 
         //when
         Wizard newWizard = wizardServiceImpl.add(wizard);
-        assertThat(newWizard.getId()).isEqualTo(wizard.getId());
         assertThat(newWizard.getName()).isEqualTo(wizard.getName());
         verify(wizardRepository,times(1)).save(wizard);
     }
@@ -193,7 +188,7 @@ class WizardServiceImplTest {
         given(wizardRepository.findById(123L)).willReturn(Optional.empty());
 
         //when
-        assertThrows(WizardNotFoundException.class,()->{
+        assertThrows(ObjectNotFoundException.class,()->{
             wizardServiceImpl.update(123L,oldWizard);
         });
         //then
@@ -219,7 +214,7 @@ class WizardServiceImplTest {
         //given
         given(wizardRepository.findById(123L)).willReturn(Optional.empty());
         //when
-        assertThrows(WizardNotFoundException.class,()->{
+        assertThrows(ObjectNotFoundException.class,()->{
             wizardServiceImpl.delete(123L);
         });
         //then

@@ -1,10 +1,9 @@
 package com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl;
 
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ObjectNotFoundException;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Wizard;
 import com.omneya.hogwarts.hogwartsartifactsonline.repositories.WizardRepository;
 import com.omneya.hogwarts.hogwartsartifactsonline.services.WizardService;
-import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.WizardNotFoundException;
-import com.omneya.hogwarts.hogwartsartifactsonline.utils.IdWorker;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,12 +16,12 @@ import java.util.List;
 
 public class WizardServiceImpl implements WizardService {
     private final WizardRepository wizardRepository;
-    private final IdWorker idWorker;
+
 
 
     @Override
     public Wizard findById(Long id) {
-        return this.wizardRepository.findById(id).orElseThrow(() -> new WizardNotFoundException(id));
+        return this.wizardRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
     }
 
     @Override
@@ -32,7 +31,6 @@ public class WizardServiceImpl implements WizardService {
 
     @Override
     public Wizard add(Wizard wizard) {
-        wizard.setId(idWorker.nextId());
         return this.wizardRepository.save(wizard);
     }
 
@@ -43,12 +41,13 @@ public class WizardServiceImpl implements WizardService {
                 (oldWizard)->{
                     oldWizard.setName(update.getName());
                     return this.wizardRepository.save(oldWizard);
-                }).orElseThrow(() -> new WizardNotFoundException(id));
+                }).orElseThrow(() -> new ObjectNotFoundException(id));
     }
 
     @Override
     public void delete(Long id) {
-        Wizard wizard=wizardRepository.findById(id).orElseThrow(() -> new WizardNotFoundException(id));
+        Wizard wizard=wizardRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
+        wizard.removeAllArtifacts();
         wizardRepository.deleteById(id);
     }
 }

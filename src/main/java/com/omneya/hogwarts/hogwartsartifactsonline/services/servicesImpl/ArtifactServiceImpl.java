@@ -1,6 +1,7 @@
 package com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl;
 
-import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ArtifactNotFoundException;
+
+import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ObjectNotFoundException;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Artifact;
 import com.omneya.hogwarts.hogwartsartifactsonline.repositories.ArtifactRepository;
 import com.omneya.hogwarts.hogwartsartifactsonline.services.ArtifactService;
@@ -27,7 +28,7 @@ public class ArtifactServiceImpl implements ArtifactService {
 
       return this.artifactRepository
                  .findById(id)
-                 .orElseThrow(()->new ArtifactNotFoundException(id));
+                 .orElseThrow(()->new ObjectNotFoundException(id));
     }
 
     @Override
@@ -50,13 +51,13 @@ public class ArtifactServiceImpl implements ArtifactService {
                     oldArtifact.setImageURL(update.getImageURL());
 
                     return this.artifactRepository.save(oldArtifact);
-                }).orElseThrow(()->new ArtifactNotFoundException(id));
+                }).orElseThrow(()->new ObjectNotFoundException(id));
 
     }
 
     @Override
     public void delete(String id) {
-       Artifact artifact=this.artifactRepository.findById(id).orElseThrow(()->new ArtifactNotFoundException(id));
+       Artifact artifact=this.artifactRepository.findById(id).orElseThrow(()->new ObjectNotFoundException(id));
         this.artifactRepository.deleteById(id);
     }
 
