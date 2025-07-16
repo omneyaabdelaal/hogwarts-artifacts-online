@@ -1,7 +1,9 @@
 package com.omneya.hogwarts.hogwartsartifactsonline.services.servicesImpl;
 
 import com.omneya.hogwarts.hogwartsartifactsonline.exceptions.ObjectNotFoundException;
+import com.omneya.hogwarts.hogwartsartifactsonline.models.Artifact;
 import com.omneya.hogwarts.hogwartsartifactsonline.models.Wizard;
+import com.omneya.hogwarts.hogwartsartifactsonline.repositories.ArtifactRepository;
 import com.omneya.hogwarts.hogwartsartifactsonline.repositories.WizardRepository;
 import com.omneya.hogwarts.hogwartsartifactsonline.services.WizardService;
 import jakarta.transaction.Transactional;
@@ -16,6 +18,7 @@ import java.util.List;
 
 public class WizardServiceImpl implements WizardService {
     private final WizardRepository wizardRepository;
+    private final ArtifactRepository artifactRepository;
 
 
 
@@ -49,5 +52,18 @@ public class WizardServiceImpl implements WizardService {
         Wizard wizard=wizardRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
         wizard.removeAllArtifacts();
         wizardRepository.deleteById(id);
+    }
+
+    @Override
+    public void assignArtifact(Long wizardId, String artifactId) {
+        Artifact artifact= this.artifactRepository.findById(artifactId).orElseThrow(()->  new ObjectNotFoundException(artifactId));
+        Wizard wizard= this.wizardRepository.findById(wizardId).orElseThrow(() -> new ObjectNotFoundException(wizardId));
+
+
+        if(artifact.getOwner() !=null){
+            artifact.getOwner().removeArtifact(artifact);
+        }
+        wizard.addArtifact(artifact);
+
     }
 }
