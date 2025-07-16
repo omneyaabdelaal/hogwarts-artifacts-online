@@ -189,17 +189,13 @@ class ArtifactServiceImplTest {
     @Test
     public void testUpdateArtifactNotFound(){
         //GIVEN
-        Artifact newArtifact = new Artifact();
-        newArtifact.setName("Invisibility Cloak");
-        newArtifact.setDescription("Updated-Description");
-        newArtifact.setImageURL("ImageUrl");
 
         given(artifactRepository.findById("1250808601744904192")).willReturn(Optional.empty());
 
         //WHEN and then
 
         assertThrows(ObjectNotFoundException.class,()->{
-            artifactServiceImpl.update("1250808601744904192",newArtifact);
+            artifactServiceImpl.update("1250808601744904192",new Artifact());
         });
 
         verify(artifactRepository,times(1)).findById("1250808601744904192");

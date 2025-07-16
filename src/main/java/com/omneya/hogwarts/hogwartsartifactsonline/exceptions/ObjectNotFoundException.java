@@ -9,4 +9,6 @@ public  class ObjectNotFoundException extends RuntimeException {
     public ObjectNotFoundException(String id) {
         super("Could Not Find Artifact with Id "+id+" :(!");
     }
+
+    public ObjectNotFoundException(String objectName,Long id) {super("Could Not Find " + objectName+ " with Id "+id+" :(!");}
 }

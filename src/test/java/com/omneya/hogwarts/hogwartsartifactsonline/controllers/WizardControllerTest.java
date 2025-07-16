@@ -164,7 +164,7 @@ class WizardControllerTest {
     @Test
     void testUpdateWizardSuccess() throws Exception {
         //given
-        WizardDto wizardDto = new WizardDto(null, "Wizard", 0);
+        WizardDto wizardDto = new WizardDto(null, "Updated-Wizard", 0);
         String json = objectMapper.writeValueAsString(wizardDto);
         Wizard wizard = new Wizard();
         wizard.setId(1L);
