@@ -12,4 +12,5 @@ public interface WizardService {
     Wizard add(Wizard wizard);
     Wizard update(Long id, Wizard wizard);
     void delete(Long id);
+    void assignArtifact(Long wizardId, String artifactId);
 }
